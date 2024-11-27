@@ -1,31 +1,6 @@
-import math
-
+from Classes.calculator import Calculator
+from __init__ import memory, history
 from settings import decimal_places
-from __init__ import memory, history, show_history
-
-# Function for calculator operations
-def calculate(num1, num2, operator):
-    match operator:
-        case 1:  # Addition
-            return num1 + num2, '+'
-        case 2:  # Subtraction
-            return num1 - num2, '-'
-        case 3:  # Multiplication
-            return num1 * num2, '*'
-        case 4:  # Division
-            if num2 != 0:
-                return num1 / num2, '/'
-            else:
-                return "Error: Division by zero!", None
-        case 5:  # Exponentiation
-            return num1 ** num2, '^'
-        case 6:  # Modulo
-            return num1 % num2, '%'
-        case 7:  # Square root
-            return math.sqrt(num1), '√'
-        case _:
-            return "Error: Invalid operator!", None
-
 # Input validation for numbers
 def get_number(prompt):
     while True:
@@ -49,6 +24,7 @@ def get_operator():
 # Main calculator loop
 def main():
     global memory, decimal_places
+    calc = Calculator
     
     while True:
         # Get numbers and operator with validation
@@ -57,11 +33,11 @@ def main():
         
         # Square root only needs one number
         if operator == 7:  # Square root
-            result, operation_symbol = calculate(num1, None, operator)
+            result, operation_symbol = calc.calculate(num1, None, operator)
             operation_str = f"√{num1}"
         else:
             num2 = get_number("Enter the second number (or 'm' for memory): ")
-            result, operation_symbol = calculate(num1, num2, operator)
+            result, operation_symbol = calc.calculate(num1, num2, operator)
             operation_str = f"{num1} {operation_symbol} {num2}"
 
         # Display result with conditional formatting
@@ -84,7 +60,7 @@ def main():
         # Show history
         history_option = input("Do you want to view calculation history? (y/n): ").strip().lower()
         if history_option == 'y':
-            show_history()
+            calc.show_history()
         
         # Settings adjustment
         settings_option = input("Do you want to change calculator settings? (y/n): ").strip().lower()
