@@ -1,18 +1,7 @@
 import math
 
-# Memory and settings
-memory = None
-history = []
-decimal_places = 2  # Default number of decimal places
-
-# Function to display history
-def show_history():
-    if history:
-        print("\nCalculation history:")
-        for entry in history:
-            print(entry)
-    else:
-        print("No calculations yet.")
+from settings import decimal_places
+from __init__ import memory, history, show_history
 
 # Function for calculator operations
 def calculate(num1, num2, operator):

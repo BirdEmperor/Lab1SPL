@@ -1,0 +1,1 @@
+decimal_places = 2  # Default number of decimal places
